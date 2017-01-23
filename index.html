@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta name="viewport" content="width=800, height=480", user-scalable="no", initial-scale="1", maximum-scale="1">
+	<meta charset="UTF-8">
+
+	<title>jarvis.ui</title>
+	
+	<!--CSS-->
+	<link rel="stylesheet" type="text/css" href="./style.css">
+	<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/1.3.2/css/weather-icons.css">
+
+
+</head>
+<body onload="start()">
+
+<div style="display:block" class="page page-home">
+  <div class="bg"></div>
+  <div clas-="overlay"></div>
+  <div class="panel panel-time">
+    <div class="span time" id="time"></div>
+    <div class="span date" id="date"></div>
+  </div>
+  <div class="panel panel-weather">
+    <div class="location" id="location"></div>
+    <!--.icon.wi.wi-day-sunny-overcast--><img id="current_weather"/>
+    <div class="span temp"><span id="current_temp"></span><span class="degree">&deg;C</span></div>
+    <div class="span text" id ="meteo_condition"></div>
+  </div>
+  <div class="panel panel-calendar">
+    <ul id="liste_event_day">
+    </ul>
+  </div>
+  <div class="panel panel-tasks">
+    <ul>
+      <div id="app_liste_taches">
+        
+      </div>
+      
+      <li class="other">
+        <div class="plus"></div>
+        <div class="title">...</div>
+      </li>
+    </ul>
+  </div>
+  <div class="panel panel-functions">
+    <div data-page="weather" class="icon icon-weather"><i class="fa fa-sun-o"></i><span class="title">Weather</span></div>
+    <div data-page="calendar" class="icon icon-calendar"><i class="fa fa-calendar"></i><span class="title">Calendar</span></div>
+    <div data-page="map" class="icon icon-map"><i class="fa fa-globe"></i><span class="title">Map</span></div>
+    <div data-page="tasks" class="icon icon-tasks"><i class="fa fa-tasks"></i><span class="title">Tasks</span></div>
+    <div data-page="news" class="icon icon-news"><i class="fa fa-rss"></i><span class="title">News</span></div>
+  </div>
+</div>
+<div class="page page-weather">
+  <div class="bg"></div>
+  <div class="overlay"></div>
+  <div class="panel panel-now">
+    <div class="mainInfo">
+      <!--.icon.wi.wi-day-sunny--><img id="meteo_oftheday_icon" />
+      <div class="temp"><span class="value"><span id="meteo_oftheday_min"></span><span class="degree">&deg;C</span></span><span class="separator">/</span><span class="value"><span id="meteo_oftheday_max"></span><span class="degree">&deg;C</span></span></div>
+    </div>
+    <div class="row">
+      <div class="info"><i class="wi wi-strong-wind"></i><span class="value"><span id="wind_speed"></span> km/h</span></div>
+      <div class="info"><i class="wi wi-wind-default _150-deg"></i><span class="value" id="wind_direction"></span></div>
+      <div class="info"><i class="wi wi-sprinkles"></i><span class="value"><span id="humidity"></span></span></div>
+    </div>
+  </div>
+  <div class="panel panel-today">
+    <div class="box">
+      <div class="title" id="meteo_moment1"></div>
+        <img id="meteo_moment1_icon"/>
+      <div class="temp"><span class="value"><span id="meteo_moment1_temp"></span><span class="degree">&deg;C</span></span></div>
+    </div>
+    <div class="box">
+      <div class="title" id="meteo_moment2"></div>
+        <img id="meteo_moment2_icon"/>
+      <div class="temp"><span class="value"><span id="meteo_moment2_temp"></span><span class="degree">&deg;C</span></span></div>
+    </div>
+    <div class="box">
+      <div class="title" id="meteo_moment3"></div>
+        <img id="meteo_moment3_icon"/>
+      <div class="temp"><span class="value"><span id="meteo_moment3_temp"></span><span class="degree">&deg;C</span></span></div>
+    </div>
+  </div>
+  <div class="panel panel-location">
+    <div class="title"><span id="location_city"></span><span id="location_country"></span></div>
+    <div class="icon fa fa-map-marker"></div>
+  </div>
+  <div class="panel panel-forecast">
+    <div class="box">
+      <div class="title" id="meteo_day1"></div>
+        <img id=meteo_day1_icon />
+      <div class="temp"><span class="value"><span id="meteo_day1_min"></span><span class="degree">&deg;C</span></span><span class="separator">/</span><span class="value"><span id="meteo_day1_max"></span><span class="degree">&deg;C</span></span></div>
+    </div>
+    <div class="box">
+      <div class="title" id="meteo_day2"></div>
+        <img id=meteo_day2_icon />
+      <div class="temp"><span class="value"><span id="meteo_day2_min"></span><span class="degree">&deg;C</span></span><span class="separator">/</span><span class="value"><span id="meteo_day2_max"></span><span class="degree">&deg;C</span></span></div>
+    </div>
+    <div class="box">
+      <div class="title" id="meteo_day3"></div>
+        <img id=meteo_day3_icon />
+      <div class="temp"><span class="value"><span id="meteo_day3_min"></span><span class="degree">&deg;C</span></span><span class="separator">/</span><span class="value"><span id="meteo_day3_max"></span><span class="degree">&deg;C</span></span></div>
+    </div>
+    <div class="box">
+      <div class="title" id="meteo_day4"></div>
+        <img id=meteo_day4_icon />
+      <div class="temp"><span class="value"><span id="meteo_day4_min"></span><span class="degree">&deg;C</span></span><span class="separator">/</span><span class="value"><span id="meteo_day4_max"></span><span class="degree">&deg;C</span></span></div>
+    </div>
+    <div class="box">
+      <div class="title" id="meteo_day5"></div>
+        <img id=meteo_day5_icon />
+      <div class="temp"><span class="value"><span id="meteo_day5_min"></span><span class="degree">&deg;C</span></span><span class="separator">/</span><span class="value"><span id="meteo_day5_max"></span><span class="degree">&deg;C</span></span></div>
+    </div>
+    <div class="box">
+      <div class="title" id="meteo_day6"></div>
+        <img id=meteo_day6_icon />
+      <div class="temp"><span class="value"><span id="meteo_day6_min"></span><span class="degree">&deg;C</span></span><span class="separator">/</span><span class="value"><span id="meteo_day6_max"></span><span class="degree">&deg;C</span></span></div>
+    </div>
+  </div>
+</div>
+<div class="page page-calendar">
+  <div class="bg"></div>
+  <div class="overlay"></div>
+  <div class="panel panel-calendar left">
+    <div class="header">
+      <div class="title" id="planning_col1_title"></div>
+      <div class="date" id="planning_col1_date"></div>
+    </div>
+    <ul id="planning_col1_ul"></ul>
+  </div>
+  <div class="panel panel-calendar right">
+    <div class="header">
+      <div class="title"  id="planning_col2_title"></div>
+      <div class="date"  id="planning_col2_date"></div>
+    </div>
+    <ul id="planning_col2_ul">
+    </ul>
+  </div>
+</div>
+<div class="page page-map">
+  <div class="bg"></div>
+  <div class="overlay"></div>
+  <div class="title">Traffic map</div>
+
+
+
+</div>
+</div>
+<div class="page page-tasks">
+  <div class="bg"></div>
+  <div class="overlay"></div>
+  <div class="wrapper">
+  <div id="todo-liste-insert">
+    <!--<div class="panel panel-tasklist">
+      <div class="header">
+        <div class="title">Shopping list (4)</div>
+      </div>
+      <div class="newItem">
+        <div class="text"><i class="fa fa-plus"></i><span class="title">Add new item</span></div>
+        <input type="text" placeholder="Ajouter"/>
+      </div>
+      <ul>
+        <li class="checked">
+          <div class="check"></div>
+          <div class="title">Milk</div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="title">Bread</div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="title">Cheese</div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="title">Beer</div>
+        </li>
+      </ul>
+    </div>
+    <div class="panel panel-tasklist">
+      <div class="header">
+        <div class="title">To-do list (5)</div>
+      </div>
+      <div class="newItem">
+        <div class="text"><i class="fa fa-plus"></i><span class="title">Add new item</span></div>
+        <input type="text" placeholder="Add new item"/>
+      </div>
+      <ul>
+        <li>
+          <div class="check"></div>
+          <div class="title">Cleaning</div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="title">Washing</div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="title">Shopping</div>
+        </li>
+        <li class="checked">
+          <div class="check"></div>
+          <div class="title">Pay bills</div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="title">Dusting</div>
+        </li>
+      </ul>
+    </div>
+    <div class="panel panel-tasklist">
+      <div class="header">
+        <div class="title">Long-term tasks (3)</div>
+      </div>
+      <div class="newItem">
+        <div class="text"><i class="fa fa-plus"></i><span class="title">Add new item</span></div>
+        <input type="text" placeholder="Add new item"/>
+      </div>
+      <ul>
+        <li>
+          <div class="check"></div>
+          <div class="title">Prepare boiler</div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="title">Buy a sofa</div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="title">Car service</div>
+        </li>
+      </ul>
+    </div>-->
+  </div>
+  </div>
+</div>
+<div class="page page-news">
+  <div class="bg"></div>
+  <div class="overlay">
+    <div class="panel panel-newslist-big">		
+      <ul id="rss_main_ul" style="padding-left:0px;">
+        <li>
+          <div id="rss_main_bg" style="background-image: url('http://cnet1.cbsistatic.com/hub/i/2012/10/15/1b4b10cd-fdb7-11e2-8c7c-d4ae52e62bcc/4669586ec99fd664fe4862edf2249436/Sonos_Connect_33190898_02_540x386.jpg');" class="image">
+            <div class="source" id="rss_main_source"></div>
+            <div class="time" id="rss_main_date"></div>
+          </div>
+          <div class="title" id="rss_main_titre"></div>
+          <div class="description" id="rss_main_content"></div>
+        </li>
+      
+      </ul>
+    </div>
+    <div class="panel panel-newslist-small">		
+      <ul id="rss_liste_ul">
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+	<!--JS-->
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.4/hammer.min.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY37X3bO9Ujn-w17cgmcogzhc6G0jhMI8"></script>
+
+	<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/102308/ScrollToPlugin.js" type="text/javascript" charset="utf-8" async defer></script>
+	<script type="text/javascript" src="./js/main.js"></script>
+
+	<!--dynamic script-->
+  <script type="text/javascript" src="./js/variables.js"></script>
+  <script type="text/javascript" src="./to-do-list/read.js"></script>
+  <script type="text/javascript" src="./js/date.js"></script>
+	<script type="text/javascript" src="./js/clock.js"></script>
+  <script type="text/javascript" src="./js/meteo.js"></script>
+  <script type="text/javascript" src="./js/calendar.js"></script>
+  <script type="text/javascript" src="./js/rss.js"></script>
+  <script type="text/javascript" src="./js/start.js"></script>
+  <script type="text/javascript">
+   loadTodoList();  
+  </script>
+</body>
+</html>
